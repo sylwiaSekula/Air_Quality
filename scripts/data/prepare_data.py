@@ -64,8 +64,9 @@ def main():
     df.to_csv(output_resampled_path, index=False)
     # prepare the train dataset for statistical models
     df_stat_train = prepare_statistical_train_dateset(df, end_date, columns_to_drop, train_dataset_columns)
+    # save the train dataset for statistical models
     df_stat_train.to_csv(output_train_path)
-    print(df_stat_train)
+
 
 
 if __name__ == '__main__':

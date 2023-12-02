@@ -41,7 +41,6 @@ def prepare_statistical_train_dateset(dataframe: pd.DataFrame, end_date: str, co
 
 
 
-
 def main():
     current_directory = os.getcwd()
     input_filename = 'sp_air_quality.csv'

@@ -21,8 +21,8 @@ def select_station_and_resample_dataset(dataframe: pd.DataFrame, station_column_
     return dataframe
 
 
-def prepare_statistical_train_dateset(dataframe: pd.DataFrame, end_date: str, columns_to_drop: list,
-                          train_dataset_columns: list) -> pd.DataFrame:
+def create_statistical_train_dateset(dataframe: pd.DataFrame, end_date: str, columns_to_drop: list,
+                                     train_dataset_columns: list) -> pd.DataFrame:
     """
     Prepares the training dataset for statistical models for time series forecasting
     by filtering data up to the specified end date, dropping selected columns,
@@ -62,7 +62,7 @@ def main():
     # save the resampled dataset
     df.to_csv(output_resampled_path, index=False)
     # prepare the train dataset for statistical models
-    df_stat_train = prepare_statistical_train_dateset(df, end_date, columns_to_drop, train_dataset_columns)
+    df_stat_train = create_statistical_train_dateset(df, end_date, columns_to_drop, train_dataset_columns)
     # save the train dataset for statistical models
     df_stat_train.to_csv(output_train_path)
 

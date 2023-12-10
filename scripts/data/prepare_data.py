@@ -55,7 +55,7 @@ def main():
     df = select_station_and_resample_dataset(df, station_column_name, selected_station, date_time_column_name,
                                              resample_label)
     # save the resampled dataset
-    df.to_csv(output_resampled_path, index=False)
+    df.to_csv(output_resampled_path, index=True)
     # prepare the train dataset for statistical models
     df_train, df_test = create_train_test_dateset(df, n_periods, columns_to_drop, dataset_columns)
     # save the train dataset for statistical models

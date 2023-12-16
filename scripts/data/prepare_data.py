@@ -46,7 +46,6 @@ def main():
     df = pd.read_csv(input_path)
     station_column_name = 'Station'
     selected_station = 'Taubaté'
-    date_time_column_name = 'Datetime'
     resample_label = "M"
     n_periods = 12
     columns_to_drop = ['Benzene', 'CO', 'PM2.5', 'NO2', 'O3', 'SO2', 'Toluene', 'TRS']

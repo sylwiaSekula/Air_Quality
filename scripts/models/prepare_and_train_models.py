@@ -55,7 +55,7 @@ def fit_model(df_train: pd.DataFrame, model, predicted_column: str, datestamp_co
         forecast_prophet = model.predict(fh_prophet)
         forecast_prophet[datestamp_column] = pd.to_datetime(forecast_prophet[datestamp_column])
         forecast_prophet.set_index(datestamp_column, inplace=True)
-        fitted_prophet = forecast_prophet[(forecast_prophet.index <= pd.to_datetime('2019-09-01'))]
+        fitted_prophet = forecast_prophet[(forecast_prophet.index <= pd.to_datetime('2019-10-01'))]
         forecast_prophet = forecast_prophet[(forecast_prophet.index >= pd.to_datetime('2019-09-01'))]
         return fitted_prophet['yhat'], forecast_prophet['yhat']
     else:
@@ -66,7 +66,6 @@ def main():
     # read the data
     df_train, df_resampled = read_data(output_train_path, output_resampled_path, date_time_column_name,
                                        datestamp_column)
-
     # create models
     hw = ExponentialSmoothing(trend='add', seasonal='multiplicative', sp=12)
     arima = AutoARIMA(sp=12, d=0, max_p=2, max_q=2, suppress_warnings=True)
@@ -78,13 +77,15 @@ def main():
     }
     # fit the models and plot
     for model_name, model in models.items():
+        # fit the model and get fitted values and predictions
         fitted, predicted = fit_model(df_train, model, predicted_column, datestamp_column)
         plt.figure(figsize=(12, 8))
-        plt.plot(df_resampled['PM10'], label='actuals')
-        plt.plot(fitted, label='fitted')
-        plt.plot(predicted, label='predicted')
+        plt.plot(df_resampled['PM10'], label='actuals') # plot actual PM10 values from the resampled data
+        plt.plot(fitted, label='fitted') # plot fitted values from the model
+        plt.plot(predicted, label='predicted') # plot predicted values from the model
         plt.title(model_name)
         plt.legend()
+        plt.savefig(f'../plots/{model_name}.png', format='png')
         plt.show()
 
 

@@ -15,11 +15,9 @@ def read_data(train_path: str, resampled_path: str, date_time_column_name: str, 
     :param resampled_path: str, the filepath to the resampled data CSV file
     :param date_time_column_name: str, the name of the column in the resampled data CSV file that represents the date
     :param datestamp_column: str, the name of the column in the training data CSV file that represents the date
-    :return:  Tuple: Model-specific output:
-    - ExponentialSmoothing or AutoARIMA: Tuple of fitted values and predictions.
-    - Prophet: Tuple of fitted values and forecasted values.
-    Raises:
-    - TypeError: If the model type is not one of (ExponentialSmoothing, AutoARIMA, or Prophet).
+    :return:
+        - df_train: pd.DataFrame, the processed training data
+        - df_resampled: pd.DataFrame, the processed resampled data
     """
     df_train = pd.read_csv(train_path)
     df_resampled = pd.read_csv(resampled_path)
@@ -37,7 +35,11 @@ def fit_model(df_train: pd.DataFrame, model, predicted_column: str, datestamp_co
     :param model: the time series forecasting model (AutoARIMA, ExponentialSmoothing, Prophet)
     :param predicted_column: (str), the column name of the target variable
     :param datestamp_column: (str), the name of the column representing the date or timestamp in the data
-    :return:
+    :return: Tuple: Model-specific output:
+    - ExponentialSmoothing or AutoARIMA: Tuple of fitted values and predictions.
+    - Prophet: Tuple of fitted values and forecasted values.
+    Raises:
+    - TypeError: If the model type is not one of (ExponentialSmoothing, AutoARIMA, or Prophet).
     """
     if isinstance(model, (AutoARIMA, ExponentialSmoothing)):
         y_train = df_train[predicted_column]

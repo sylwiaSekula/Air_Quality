@@ -1,9 +1,10 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 from prophet import Prophet
 from sktime.forecasting.arima import AutoARIMA
-import matplotlib.pyplot as plt
-from scripts.settings import *
 from sktime.forecasting.exp_smoothing import ExponentialSmoothing
+
+from scripts.settings import *
 
 
 def read_data(train_path: str, resampled_path: str, date_time_column_name: str, datestamp_column: str) \

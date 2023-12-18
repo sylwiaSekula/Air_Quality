@@ -18,7 +18,8 @@ The dataset includes the following columns:<br>
 ### Objective
 The primary goal of this project is to forecast monthly PM10 pollution levels in the air using historical data collected from the 'Taubaté' station in São Paulo, Brazil.
 ### Methodology
-#### Data Preprocessing: First I processed the original dataset and created new datasets. I resampled the data monthly for models compatibility, dropped irrelevant columns for statisctical models. I created new datasets: df_resampled (the original dataset with resampled the data monthly), df_train and df_test for statisctical models, df_train_ml and df_test_ml for a machine leraning model in which I created 12 new columns with lag features <br>
+#### Data Preprocessing: 
+First I processed the original dataset and created new datasets. I resampled the data monthly for models compatibility, dropped irrelevant columns for statisctical models. I created new datasets: df_resampled (the original dataset with resampled the data monthly), df_train and df_test for statisctical models, df_train_ml and df_test_ml for a machine leraning model in which I created 12 new columns with lag features <br>
 #### Model Selection:<br>
 I implemented statistical models:<br>
 HoltWinters (ExponentialSmoothing from sktime)<br>

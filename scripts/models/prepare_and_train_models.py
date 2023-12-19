@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import xgboost as xgb
 from prophet import Prophet
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
 from sktime.forecasting.arima import AutoARIMA
 from sktime.forecasting.exp_smoothing import ExponentialSmoothing
 
@@ -107,6 +107,7 @@ def main():
         # fit the model and get fitted values and predictions
         fitted, predicted = fit_model(df_train, df_train_ml, df_test_ml, model, predicted_column, datestamp_column)
         mae = mean_absolute_error(df_test_ml[predicted_column], predicted)
+        mape = mean_absolute_percentage_error(df_test_ml[predicted_column], predicted)
         if model == xgboost:
             # create the dataset with predicted values with datetime index
             datetime_index = df_test_ml.index
@@ -118,8 +119,7 @@ def main():
             plt.legend()
             plt.savefig(f'../plots/{model_name}.png', format='png')
             plt.show()
-            print(type(fitted), type(predicted))
-            print(model_name, mae)
+            print(model_name, f'Mean absoulte error: {mae}, Mean absolute_percentage_error: {mape}')
         else:
             plt.figure(figsize=(12, 8))
             plt.plot(df_resampled['PM10'], label='actuals')  # plot actual PM10 values from the resampled data
@@ -129,7 +129,7 @@ def main():
             plt.legend()
             plt.savefig(f'../plots/{model_name}.png', format='png')
             plt.show()
-            print(model_name, mae)
+            print(model_name, f'Mean absoulte error: {mae}, Mean absolute_percentage_error: {mape}')
 
 
 if __name__ == '__main__':

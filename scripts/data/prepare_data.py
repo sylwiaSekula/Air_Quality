@@ -70,12 +70,13 @@ def main():
     # save the resampled dataset
     df.to_csv(output_resampled_path, index=True)
     # prepare the train dataset for statistical models
-    #df_train, df_test = create_train_test_dateset(df, n_periods, columns_to_drop, dataset_columns)
+    df_train, df_test = create_train_test_dateset(df, n_periods, columns_to_drop, dataset_columns, num_lags=0,
+                                                  predicted_column="PM10")
     df_train_ml, df_test_ml = create_train_test_dateset(df, n_periods, columns_to_drop, dataset_columns,
                                                         num_lags=num_lags, predicted_column="PM10")
     # save the train dataset for statistical models
-    # df_train.to_csv(output_train_path, index=False)
-    # df_test.to_csv(output_test_path, index=False)
+    df_train.to_csv(output_train_path, index=False)
+    df_test.to_csv(output_test_path, index=False)
     df_train_ml.to_csv(output_train_ml_filename, index=False)
     df_test_ml.to_csv(output_test_ml_filename, index=False)
 

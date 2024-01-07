@@ -29,7 +29,16 @@ I implemented statistical models used for time series forecasting:<br>
 and a machine learning model:<br>
 <b> XGBoost </b> - although not specifically designed for time series forecasting, is a highly versatile and powerful machine learning algorithm extensively used in various predictive modeling tasks. While XGBoost is not inherently dedicated for time series data, its flexibility and ability to handle complex relationships in data make it adaptable for time-dependent predictions.<br>
 #### Model Evaluation: 
-I evaluated the performance of each model using appropriate metrics for time series forecasting. 
+I evaluated the performance of each model using metrics: Mean Absolute Error (MAE) and Mean Absolute Percentage Error (MAPE) and plots.
+
+| Model          | Mean Absolute Error (MAE) | Mean Absolute Percentage Error (MAPE) |
+|----------------|---------------------------|---------------------------------------|
+| Holt-Winters   | 2.94                      | 0.16                                  |
+| AutoARIMA      | 3.65                      | 0.24                                  |
+| Prophet        | 3.35                      | 0.22                                  |
+| XGBoost        | 1.56                      | 0.09                                  |
+
+Please note that the values have been rounded to two decimal places as requested.
 ![HW](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/0dcaf1e3-dadc-48fd-a6c9-1541b4e74e89)
 
 ![AutoARIMA](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/2d9eae18-7e8d-432d-893c-431ba5a06f55)
@@ -38,5 +47,12 @@ I evaluated the performance of each model using appropriate metrics for time ser
 
 ![XGBoost](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/4d5e60a4-d33f-4ea6-834d-f187ee0e8802)
 
+#### Conclusion:<br>
+In summary,
+XGboost achieved the best results amongs evaluated models. It had the lowest errors MAE (1.56) and MAPE (0.09).
+Holt-Winters (Exponential Smoothing) demonstrated the best performance among the statistical models with the lowest MAE (2.94) and MAPE (0.16).
+Prophet resulted with slightly higher errors compared to Holt-Winters but performed better than AutoARIMA, which had the highest errors among the three models.
+
+Consideration of these metrics suggests that XGBoost might be the most suitable model for predicting this specific dataset and task. 
 
 

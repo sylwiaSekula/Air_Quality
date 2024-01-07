@@ -38,8 +38,8 @@ def create_train_test_dateset(dataframe: pd.DataFrame, n_periods: int, columns_t
     :return: pd.DataFrame, prepared training dataset
     """
     if num_lags > 0:
-        for i in range(1, num_lags + 1):
-            dataframe[f'lag_{i}'] = dataframe[predicted_column].shift(i)
+        #for i in range(1, num_lags + 1):
+        dataframe[f'lag_{num_lags}'] = dataframe[predicted_column].shift(num_lags)
         dataframe = dataframe.drop(dataframe.index[:12])
         missing_values = dataframe.isnull().sum()
         columns_with_missing = missing_values[missing_values > 0]
@@ -79,6 +79,8 @@ def main():
     df_test.to_csv(output_test_path, index=False)
     df_train_ml.to_csv(output_train_ml_filename, index=False)
     df_test_ml.to_csv(output_test_ml_filename, index=False)
+    print(df_train_ml)
+
 
 
 if __name__ == '__main__':

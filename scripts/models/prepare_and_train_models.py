@@ -41,7 +41,7 @@ def read_data(train_path: str, train_ml_path: str, test_ml_path: str, resampled_
     return df_train, df_train_ml, df_test_ml, df_resampled
 
 
-def fit_model(df_train: pd.DataFrame, df_train_ml: pd.DataFrame, df_test_ml: pd.DataFrame, model, predicted_column: str,
+def fit_predict_model(df_train: pd.DataFrame, df_train_ml: pd.DataFrame, df_test_ml: pd.DataFrame, model, predicted_column: str,
               datestamp_column: str) -> tuple:
     """
     Fit time series forecasting models and make predictions.
@@ -79,9 +79,20 @@ def fit_model(df_train: pd.DataFrame, df_train_ml: pd.DataFrame, df_test_ml: pd.
         y_train = df_train_ml[predicted_column]
         X_train = df_train_ml.drop(predicted_column, axis=1)
         X_test = df_test_ml.drop(predicted_column, axis=1)
+        y_test = df_test_ml[predicted_column]
+        fh = pd.date_range(y_test.index[0], periods=n_periods, freq='M')
         y_fitted_model = model.fit(X_train, y_train)
-        y_pred_model = model.predict(X_test)
+        y_pred_list = []
+        for i in range(X_test.shape[0] // 12):
+            if i != 0:
+                X_test.iloc[12 * i: 12 * (i + 1), -1] = y_pred
+            y_pred = model.predict(X_test[12 * i: 12 * (i + 1)])
+            pred = pd.Series(data=y_pred, index=fh[12 * i: 12 * (i + 1)])
+            y_pred_list.append(pred)
+        prediction = pd.concat(y_pred_list)
+        y_pred_model = prediction
         return y_fitted_model, y_pred_model
+
     else:
         raise TypeError("Use one of (ExponentialSmoothing, AutoARIMA,Prophet or XGBRegressor) model type.")
 
@@ -105,19 +116,16 @@ def main():
     # fit the models and plot
     for model_name, model in models.items():
         # fit the model and get fitted values and predictions
-        fitted, predicted = fit_model(df_train, df_train_ml, df_test_ml, model, predicted_column, datestamp_column)
+        fitted, predicted = fit_predict_model(df_train, df_train_ml, df_test_ml, model, predicted_column, datestamp_column)
         mae = mean_absolute_error(df_test_ml[predicted_column], predicted)
         mape = mean_absolute_percentage_error(df_test_ml[predicted_column], predicted)
         if model == xgboost:
-            # create the dataset with predicted values with datetime index
-            datetime_index = df_test_ml.index
-            predicted_df = pd.DataFrame(predicted, index=datetime_index, columns=['predicted_column'])
             plt.figure(figsize=(12, 8))
             plt.plot(df_resampled['PM10'], label='actuals')  # plot actual PM10 values from the resampled data
-            plt.plot(predicted_df['predicted_column'], label='predicted')  # plot predicted values from the model
+            plt.plot(predicted, label='predicted')  # plot predicted values from the model
             plt.title(model_name)
             plt.legend()
-            plt.savefig(f'../plots/{model_name}.png', format='png')
+            plt.savefig(f'../../plots/{model_name}.png', format='png')
             plt.show()
             print(model_name, f'Mean absoulte error: {mae}, Mean absolute_percentage_error: {mape}')
         else:
@@ -127,7 +135,7 @@ def main():
             plt.plot(predicted, label='predicted')  # plot predicted values from the model
             plt.title(model_name)
             plt.legend()
-            plt.savefig(f'../plots/{model_name}.png', format='png')
+            plt.savefig(f'../../plots/{model_name}.png', format='png')
             plt.show()
             print(model_name, f'Mean absoulte error: {mae}, Mean absolute_percentage_error: {mape}')
 

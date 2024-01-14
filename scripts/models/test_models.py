@@ -110,7 +110,6 @@ def main():
         mae = mean_absolute_error(df_test_ml[predicted_column], predicted)
         mape = mean_absolute_percentage_error(df_test_ml[predicted_column], predicted)
         if model == xgboost:
-            print(type(predicted))
             plt.figure(figsize=(12, 8))
             plt.plot(df_resampled['PM10'], label='actuals')  # plot actual PM10 values from the resampled data
             plt.plot(predicted, label='predicted')  # plot predicted values from the model

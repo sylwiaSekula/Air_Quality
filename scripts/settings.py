@@ -15,5 +15,10 @@ date_time_column_name = 'Datetime'
 datestamp_column = 'ds'
 predicted_column = 'y'
 n_periods = 12
+HW_file = 'HW.sav'
+AutoArima_file = 'AutoArima.sav'
+Prophet_file = 'Prophet.sav'
+Xgboost_file = 'Xgboost.sav'
+trained_model_dir = 'trained_models'
 
 

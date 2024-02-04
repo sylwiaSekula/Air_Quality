@@ -103,7 +103,6 @@ def main():
         'XGBoost': xgboost
     }
 
-
     # predict and plot
     for model_name, model in models.items():
         predicted = predict_model(df_train, df_test_ml, model, predicted_column, datestamp_column)

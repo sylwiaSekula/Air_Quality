@@ -36,23 +36,22 @@ I evaluated the performance of each model using metrics: Mean Absolute Error (MA
 | Holt-Winters   | 2.94                      | 0.16                                  |
 | AutoARIMA      | 3.65                      | 0.24                                  |
 | Prophet        | 3.35                      | 0.22                                  |
-| XGBoost        | 1.56                      | 0.09                                  |
+| XGBoost        | 3.99                      | 0.22                                  |
 
-Please note that the values have been rounded to two decimal places as requested.
-![HW](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/0dcaf1e3-dadc-48fd-a6c9-1541b4e74e89)
+![HW](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/3336886f-1698-44ee-a323-520b6549dc18)
 
-![AutoARIMA](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/2d9eae18-7e8d-432d-893c-431ba5a06f55)
+![AutoARIMA](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/343cb315-332a-4373-bbdc-2c2c81ca911e)
 
-![Prophet](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/9580b5bc-5d02-4c15-9890-7620284f9786)
+![Prophet](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/2946b4ae-fd66-4d29-9ceb-a6438590a219)
 
-![XGBoost](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/4d5e60a4-d33f-4ea6-834d-f187ee0e8802)
+![XGBoost](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/cc1ed366-9489-4a32-ae60-873b44428d8a)
 
 #### Conclusion:<br>
-In summary,
-XGboost achieved the best results amongs evaluated models. It had the lowest errors MAE (1.56) and MAPE (0.09).
-Holt-Winters (Exponential Smoothing) demonstrated the best performance among the statistical models with the lowest MAE (2.94) and MAPE (0.16).
-Prophet resulted with slightly higher errors compared to Holt-Winters but performed better than AutoARIMA, which had the highest errors among the three models.
 
-Consideration of these metrics suggests that XGBoost might be the most suitable model for predicting this specific dataset and task. 
+In summary, among the evaluated models:
+- **Holt-Winters (Exponential Smoothing)** achieved the best results, presenting a low MAE of 2.94 and a MAPE of 0.16.
+- **Prophet** resulted in slightly higher errors compared to Holt-Winters, with a MAE of 3.35 and a MAPE of 0.22.
+- **AutoARIMA** showed the highest errors among the statisctical models, but the result MAE of 3.65 was a bit better than XGboost, and a MAPE of 0.24.
+- **XGBoost** achieved the highest MAE - 3.99 and a Mean Absolute Percentage Error (MAPE) of 0.22.
 
-
+Considering the above metrics, **Holt-Winters (Exponential Smoothing)** seems to be the most suitable model for predicting this specific dataset and task. 

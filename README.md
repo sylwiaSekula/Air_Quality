@@ -23,7 +23,7 @@ First I processed the original dataset and created new datasets. I resampled the
 #### Model Selection:<br>
 I implemented statistical models used for time series forecasting:<br>
 <b> HoltWinters (ExponentialSmoothing from sktime) </b> - a statistical method for time series forecasting, available in sktime as Exponential Smoothing. It's capable of capturing trends and seasonality in time series data by using weighted averages and smoothing techniques. Holt-Winters includes three components: level, trend, and seasonality, making it suitable for forecasting data with both trended and seasonal patterns.<br>
-<b> Autoarima </b> - an automated version of the popular ARIMA (AutoRegressive Integrated Moving Average) model. It performs the automatic selection of the optimal ARIMA model parameters (p, d, q) through a search process, eliminating the need for manual tuning. AutoARIMA uses algorithms to identify the most suitable model based on statistical criteria, making it convenient for time series forecasting without requiring users to specify the parameters manually.
+<b> Autoarima </b> - an automated version of the popular ARIMA (AutoRegressive Integrated Moving Average) model. It performs the automatic selection of the optimal ARIMA model parameters (p, d, q) and (P, D, Q) through a search process, eliminating the need for manual tuning. AutoARIMA uses algorithms to identify the most suitable model based on statistical criteria, making it convenient for time series forecasting without requiring users to specify the parameters manually.
  <br>
 <b> Prophet </b> - developed by Facebook, Prophet is an open-source forecasting tool designed for analyzing and predicting time series data. It's based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, along with holidays and other effects.<br>
 and a machine learning model:<br>
@@ -36,7 +36,7 @@ I evaluated the performance of each model using metrics: Mean Absolute Error (MA
 | Holt-Winters   | 2.94                      | 0.16                                  |
 | AutoARIMA      | 3.65                      | 0.24                                  |
 | Prophet        | 3.35                      | 0.22                                  |
-| XGBoost        | 3.99                      | 0.22                                  |
+| XGBoost        | 2.84                      | 0.19                                  |
 
 ![HW](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/3336886f-1698-44ee-a323-520b6549dc18)
 
@@ -44,14 +44,16 @@ I evaluated the performance of each model using metrics: Mean Absolute Error (MA
 
 ![Prophet](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/2946b4ae-fd66-4d29-9ceb-a6438590a219)
 
-![XGBoost](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/cc1ed366-9489-4a32-ae60-873b44428d8a)
+![XGBoost](https://github.com/sylwiaSekula/Air_Quality/assets/110921660/ae5ca9cb-7128-48d3-b909-94928e38e277)
+
 
 #### Conclusion:<br>
 
 In summary, among the evaluated models:
-- **Holt-Winters (Exponential Smoothing)** achieved the best results, presenting a low MAE of 2.94 and a MAPE of 0.16.
-- **Prophet** resulted in slightly higher errors compared to Holt-Winters, with a MAE of 3.35 and a MAPE of 0.22.
-- **AutoARIMA** showed the highest errors among the statisctical models, but the result MAE of 3.65 was a bit better than XGboost, and a MAPE of 0.24.
-- **XGBoost** achieved the highest MAE - 3.99 and a Mean Absolute Percentage Error (MAPE) of 0.22.
+- **Holt-Winters (Exponential Smoothing)** this model did the best, with the smallest errors - a MAE of 2.94 and a MAPE of 0.16. It's the most accurate.
 
-Considering the above metrics, **Holt-Winters (Exponential Smoothing)** seems to be the most suitable model for predicting this specific dataset and task. 
+- **XGBoost** demonstrates strong performance with the best MAE of 2.84 and a MAPE of 0.19. It's a good alternative to Holt-Winters.
+
+- **Prophet** and **AutoARIMA** both exhibit slightly higher errors compared to the top two performers. Prophet reports a MAE of 3.35 and a MAPE of 0.22, while AutoARIMA shows a MAE of 3.65 and a slightly elevated MAPE of 0.24.
+
+Considering the above metrics, **Holt-Winters (Exponential Smoothing)** seems to be the most suitable model for predicting this specific dataset and task, **XGBoost** is a good choice too.

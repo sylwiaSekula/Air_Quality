@@ -56,4 +56,4 @@ In summary, among the evaluated models:
 
 - **Prophet** and **AutoARIMA** both exhibit slightly higher errors compared to the top two performers. Prophet reports a MAE of 3.35 and a MAPE of 0.22, while AutoARIMA shows a MAE of 3.65 and a slightly elevated MAPE of 0.24.
 
-Considering the above metrics, **Holt-Winters (Exponential Smoothing)** seems to be the most suitable model for predicting this specific dataset and task, **XGBoost** is a good choice too.
+Considering the above metrics, both **Holt-Winters (Exponential Smoothing)** and **XGBoost** seem to be the most suitable model for predicting this specific dataset and task.
